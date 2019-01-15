@@ -1,127 +1,133 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Déployement sur Kubernetes</title>
+    <title>Déployement sur Kubernetes</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-          <section data-markdown data-background-image="">
-              # K8S
-              <!-- https://cdn-images-1.medium.com/max/1600/1*rQuaLXlDy1-gqEPKBshcwA.gif -->
-          </section>
-				  <section >
-              <section data-markdown>
-                  # Presentation de K8S
-              </section>
-              <section data-markdown>
-                  ## un orchestrateur de conteneur
-              </section>
-              <section data-markdown>
-                  ## définit une large panoplie d'objet servant à gérer le cycle de vie d'une applicatin
-              </section>
-              <section data-markdown>
-                  ## l'unité est le pod qui correspond à un groupement de un ou plusieur conteneur qui partage tout
-              </section>
-              <section data-markdown>
-                  ## Tous ces objets sont décris en yaml
-              </section>
-          </section>
-				  <section >
-              <section data-markdown>
-                  # Points clés à comprendre
-              </section>
-              <section data-markdown>
-                  # LE POD
-                  un ou plusieurs conteneur
-                  le pod est éphemère ==> DONC l'appli doit être STATELESS
-              </section>
-              <section data-markdown>
-                  # un deployment :
-                  - c'est la mise en place de plusieur pod dans kubernetes
-                  - de pod de même type, par exemple on ne dploit pas des pods bd avec ce de l'appli
-              </section>
-              <section data-mardown>
-                  - on expose les pods du déploiment (schéma) à l'aide d'un service
-                  - qu'est ce qu'un service ? c'est une abstraction qui défini un group de pod. On donne du loadbalancer
-              </section>
-              <section data-markdown>
-                  Si une appli à besion d'avoir un état il faut un StatefulSet
-                  - donc un StatefulSet n'est pas un déployement donc nous en parelrons pas aujourd'hui (Quand on a besoin de qque chose de stable et/ou d'ordonnée exemple cassandra ou n'importe qu'elle base de donnée)
-              </section>
-          </section>
-          <section >
-              <section data-markdown>
-                  # ecrire un fichier yaml
-                  ```yaml
-                  apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
-                  kind: Deployment
-                  metadata:
-                  name: nginx-deployment
-                  spec:
-                  selector:
-                  matchLabels:
-                  app: nginx
-                  replicas: 2 # tells deployment to run 2 pods matching the template
-                  template:
-                  metadata:
-                  labels:
-                  app: nginx
-                  spec:
-                  containers:
-                  - name: nginx
-                  image: nginx:1.7.9
-                  ports:
-                  - containerPort: 80
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-background-image="">
+            # K8S
+            <!-- https://cdn-images-1.medium.com/max/1600/1*rQuaLXlDy1-gqEPKBshcwA.gif -->
+        </section>
+        <section>
+            <section data-markdown>
+                # Presentation de K8S
+            </section>
+            <section data-markdown>
+                ## un orchestrateur de conteneur
+            </section>
+            <section data-markdown>
+                ## définit une large panoplie d'objet servant à gérer le cycle de vie d'une applicatin
+            </section>
+            <section data-markdown>
+                ## l'unité est le pod qui correspond à un groupement de un ou plusieur conteneur qui partage tout
+            </section>
+            <section data-markdown>
+                ## Tous ces objets sont décris en yaml
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                # Points clés à comprendre
+            </section>
+            <section data-markdown>
+                # LE POD
+                un ou plusieurs conteneur
+                le pod est éphemère ==> DONC l'appli doit être STATELESS
+            </section>
+            <section data-markdown>
+                # un deployment :
+                - c'est la mise en place de plusieur pod dans kubernetes
+                - de pod de même type, par exemple on ne dploit pas des pods bd avec ce de l'appli
+            </section>
+            <section data-mardown>
+                - on expose les pods du déploiment (schéma) à l'aide d'un service
+                - qu'est ce qu'un service ? c'est une abstraction qui défini un group de pod. On donne du loadbalancer
+            </section>
+            <section data-markdown>
+                Si une appli à besion d'avoir un état il faut un StatefulSet
+                - donc un StatefulSet n'est pas un déployement donc nous en parelrons pas aujourd'hui (Quand on a besoin
+                de qque chose de stable et/ou d'ordonnée exemple cassandra ou n'importe qu'elle base de donnée)
+            </section>
+        </section>
+        <section>
+            <section data-markdown>
+                ```yaml
+                apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+                kind: Deployment
+                metadata:
+                name: nginx-deployment
+                spec:
+                selector:
+                matchLabels:
+                app: nginx
+                replicas: 2 # tells deployment to run 2 pods matching the template
+                template:
+                metadata:
+                labels:
+                app: nginx
+                spec:
+                containers:
+                - name: nginx
+                image: nginx:1.7.9
+                ports:
+                - containerPort: 80
+                ```
+            </section>
+            <section data-markdown>
+                - apiVersion
+            </section>
+            <section data-markdown>
+                - kind
+            </section>
+            <section data-markdown>
+                - metadata
+            </section>
+            <section data-markdown>
+                - spec
+            </section>
+        </section>
+    </div>
+</div>
 
-                  ```
-              </section>
-              <section data-markdown>
-                  - apiVersion
-              </section>
-              <section>
-                  - Kind
-              </section>
-              <section>
-                  
-              </section>
-          </section>
-			</div>
-		</div>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
 </html>
