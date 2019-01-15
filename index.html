@@ -24,8 +24,51 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+          <section data-markdown data-background-image="">
+              # K8S
+              <!-- https://cdn-images-1.medium.com/max/1600/1*rQuaLXlDy1-gqEPKBshcwA.gif -->
+          </section>
+				  <section >
+              <section data-markdown>
+                  # Presentation de K8S
+              </section>
+              <section data-markdown>
+                  ## un orchestrateur de conteneur
+              </section>
+              <section data-markdown>
+                  ## définit une large panoplie d'objet servant à gérer le cycle de vie d'une applicatin
+              </section>
+              <section data-markdown>
+                  ## l'unité est le pod qui correspond à un groupement de un ou plusieur conteneur qui partage tout
+              </section>
+              <section data-markdown>
+                  ## Tous ces objets sont décris en yaml
+              </section>
+          </section>
+				  <section >
+              <section data-markdown>
+                  # Points clés à comprendre
+              </section>
+              <section data-markdown>
+                  # LE POD
+                  un ou plusieurs conteneur
+                  le pod est éphemère ==> DONC l'appli doit être STATELESS
+              </section>
+              <section data-markdown>
+                  # un deployment :
+                  - c'est la mise en place de plusieur pod dans kubernetes
+                  - de pod de même type, par exemple on ne dploit pas des pods bd avec ce de l'appli
+              </section>
+              <section data-mardown>
+                  - on expose les pods du déploiment (schéma) à l'aide d'un service
+                  - qu'est ce qu'un service ? c'est une abstraction qui défini un group de pod. On donne du loadbalancer
+              </section>
+          </section>
+          <section >
+              <section data-markdown>
+                  # Key Things To Understand
+              </section>
+          </section>
 			</div>
 		</div>
 
