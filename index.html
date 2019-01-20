@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Déployement sur Kubernetes</title>
+    <title>Déploiement sur Kubernetes</title>
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css">
@@ -25,24 +25,29 @@
 <div class="reveal">
     <div class="slides">
         <section data-markdown data-background-image="">
-            # K8S
+            # Déploiement sur Kubernetes
             <!-- https://cdn-images-1.medium.com/max/1600/1*rQuaLXlDy1-gqEPKBshcwA.gif -->
         </section>
         <section>
             <section data-markdown>
-                # Presentation de K8S
+                # Presentation de Kubernetes
             </section>
             <section data-markdown>
-                ## un orchestrateur de conteneur
+                ## Un orchestrateur de conteneurs
             </section>
             <section data-markdown>
-                ## définit une large panoplie d'objet servant à gérer le cycle de vie d'une applicatin
+                ## Définit une large panoplie d'objets
+                But : Gérer le cycle de vie d'une application
+
             </section>
             <section data-markdown>
-                ## l'unité est le pod qui correspond à un groupement de un ou plusieur conteneur qui partage tout
+                ## Unité de base : POD
+                - Groupement de un ou plusieurs conteneurs
+                - Ces conteneurs partagent le même contexte
             </section>
             <section data-markdown>
-                ## Tous ces objets sont décris en yaml
+                ## Tous ces objets sont décrits en YAML
+                - Langage de description de type clé:valeur
             </section>
         </section>
         <section>
@@ -50,60 +55,79 @@
                 # Points clés à comprendre
             </section>
             <section data-markdown>
-                # LE POD
-                un ou plusieurs conteneur
-                le pod est éphemère ==> DONC l'appli doit être STATELESS
+                # Le Pod
+                - Unité de base
+                - Un ou plusieurs conteneurs ayant le même contexte
+                - Le Pod est éphémère
             </section>
             <section data-markdown>
-                # un deployment :
-                - c'est la mise en place de plusieur pod dans kubernetes
-                - de pod de même type, par exemple on ne dploit pas des pods bd avec ce de l'appli
-            </section>
-            <section data-mardown>
-                - on expose les pods du déploiment (schéma) à l'aide d'un service
-                - qu'est ce qu'un service ? c'est une abstraction qui défini un group de pod. On donne du loadbalancer
+                # Le Deployment
+                - Décrit la façon de créer les pods
+                - Un Deployment = une partie de l'application (ex: Base de données)
+                - Permet de facilement répliquer les pods
             </section>
             <section data-markdown>
-                Si une appli à besion d'avoir un état il faut un StatefulSet
-                - donc un StatefulSet n'est pas un déployement donc nous en parelrons pas aujourd'hui (Quand on a besoin
-                de qque chose de stable et/ou d'ordonnée exemple cassandra ou n'importe qu'elle base de donnée)
+                # Un problème
+                - Les pods sont éphémères
+                - Ils naissent, meurent sans être ressucités
+                - Chaque pod dispose de son adresse IP
+                - Comment avoir un moyen de contact stable pour accéder aux pods ?
+            </section>
+            <section data-markdown>
+                # Le service
+                - Abstraction d'un groupe de pods
+                - Une adresse fixe, au dessus des pods
+                - Permet d'exposer les pods sous-jacents
+                - Peut jouer le rôle de load balancer
+            </section>
+            <section data-markdown>
+                # Le StatefulSet
+                - Gestion ordonnée et stable de pods
+                - Adapté aux systèmes avec état (ex: BDD)
+                - Un peu hors sujet ici
             </section>
         </section>
         <section>
             <section data-markdown>
+                # Ecrire les objets
                 ```yaml
                 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
                 kind: Deployment
                 metadata:
-                name: nginx-deployment
+                    name: nginx-deployment
                 spec:
-                selector:
-                matchLabels:
-                app: nginx
-                replicas: 2 # tells deployment to run 2 pods matching the template
-                template:
-                metadata:
-                labels:
-                app: nginx
-                spec:
-                containers:
-                - name: nginx
-                image: nginx:1.7.9
-                ports:
-                - containerPort: 80
+                    selector:
+                        matchLabels:
+                            app: nginx
+                    replicas: 2 # tells deployment to run 2 pods matching the template
+                    template:
+                    metadata:
+                        labels:
+                            app: nginx
+                    spec:
+                        containers:
+                            name: nginx
+                            image: nginx:1.7.9
+                        ports:
+                            containerPort: 80
                 ```
             </section>
             <section data-markdown>
-                - apiVersion
+                # APIVERSION
+                - Décrit quelle API de Kubernetes est utilisée
             </section>
             <section data-markdown>
-                - kind
+                # KIND
+                - Quel type d'objet est décrit ci-après ?
             </section>
             <section data-markdown>
-                - metadata
+                # METADATA
+                - Quel est son nom ?
+                - Y a t'il des labels attachés ?
             </section>
             <section data-markdown>
-                - spec
+                # SPEC
+                - Propriétés propre à l'objet décrit
             </section>
         </section>
     </div>
