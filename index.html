@@ -134,19 +134,39 @@
             <section data-markdown>
                 # APIVERSION
                 - Décrit quelle API de Kubernetes est utilisée
+                ```yaml
+                apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+                ```
             </section>
             <section data-markdown>
                 # KIND
                 - Quel type d'objet est décrit ci-après ?
+                ```yaml
+                kind: Deployment
+                ```
             </section>
             <section data-markdown>
                 # METADATA
                 - Quel est son nom ?
                 - Y a t'il des labels attachés ?
+                ```yaml
+                metadata:
+                    name: nginx-deployment
+                ```
             </section>
             <section data-markdown>
                 # SPEC
                 - Propriétés propre à l'objet décrit
+
+                ```yaml
+                spec:
+                    selector:
+                        matchLabels:
+                            app: nginx
+                    replicas: 2 # tells deployment to run 2 pods matching the template
+                    template:
+                        ...
+                ```
             </section>
         </section>
         <section>
@@ -170,6 +190,9 @@
             <section data-markdown>
                 ![](https://sweetcode.io/wp-content/uploads/2018/06/helm_logo_transparent.png)
             </section>
+        </section>
+        <section data-markdown>>
+            [](https://i.chzbgr.com/full/5268909824/h17D700E1/)
         </section>
     </div>
 </div>
