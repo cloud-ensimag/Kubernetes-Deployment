@@ -32,10 +32,11 @@
         </section>
         <section>
             <section data-markdown>
-                # K8S
-                Kubernetes pour les intimes
+                # Kubernetes
+                K8S pour les intimes
 
                 ![Kubernetes logo](https://blog.wescale.fr/content/images/2018/08/kubernetes.png)
+
             </section>
             <section data-markdown>
                 ## Un orchestrateur de conteneurs
@@ -58,7 +59,9 @@
             </section>
             <section data-markdown>
                 ## Tous ces objets sont décrits en YAML
-                - Langage de description de type clé:valeur
+                ou en JSON _(il n'est pas raciste)_
+                - Langages de description de type clé:valeur
+                ![](./img/eeP7IXm.gif)
             </section>
         </section>
         <section>
@@ -69,6 +72,7 @@
                 # Le Pod
                 - Unité de base
                 - Un ou plusieurs conteneurs ayant le même contexte
+                ![pods](http://www.linuxian.com/img/kubernetes-pods.png)
                 - Le Pod est éphémère
             </section>
             <section data-markdown>
@@ -166,6 +170,7 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+        slideNumber: 'c/t',
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
